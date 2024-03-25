@@ -16,7 +16,7 @@ body {
     color: yellow;
     font-size: 50px;
     border: solid 5px rgb(88, 1, 81);
-    background-color: rgb(115, 41, 184);
+    background: linear-gradient(to right, #3700ff, #00ff00, rgb(255, 0, 242), rgb(252, 20, 20), rgb(6, 230, 211));
 }
 
 #funFact {
@@ -24,9 +24,9 @@ body {
     align-content: center;
     align-items: center;
     text-align: center;
-    color: rgb(123, 175, 252);
+    color: rgb(255, 255, 255);
     padding: 1px;
     margin-top: 40px;
     border: solid 5px rgb(88, 1, 81);
-    background-color: rgb(0, 90, 12);
+    background: linear-gradient(to right, #a52323, #aebe1d, rgb(230, 60, 215));
 }
