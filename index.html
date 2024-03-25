@@ -13,18 +13,8 @@
 
     <script>
         //MODEL
-        let countdownToEaster = new Date("Mar 30, 2024 00:00:00").getTime();
+        let countdownToEaster = new Date("Mar 30, 2024 00:00:00").getTime(); //Datoen å telle ned til
         let x = value => (value < 10 ? "0" + value : value);
-
-        let updateCountdown = setInterval(function () {
-            let now = new Date().getTime();
-            let distance = countdownToEaster - now;
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            createHtml(days, hours, minutes, seconds);
-        }, 1000);
 
         const funFacts = [
             "<b>March 25th</b> is also known as Tolkien Reading Day as well as Waffle Day",
@@ -33,11 +23,12 @@
             "<b>March 28th</b> is Lady Gaga's birthday! 🥳 ",
             "<b>March 29th</b> is the International Mermaid Day 🧜‍♀️",
             "<b>March 30th</b> <h1>HAPPY EASTER EVE!!!!!!!!</h1>",
-        ];
+        ]; //fun facts of the day! (hvis det funker)
 
         //VIEW
-        createHtml()
-        function createHtml(days, hours, minutes, seconds) { /*HTML*/
+        updateView();
+
+        function updateView(days, hours, minutes, seconds) { /*HTML*/
             const funFact = getFunFactForToday();
             document.getElementById("app").innerHTML = `
    <div id="counter">
@@ -55,9 +46,25 @@
     </div>
     `;
         }
-
+        
 
         //CONTROLLER
+
+        function updateCountdown() {
+            let now = new Date().getTime();
+            let distance = countdownToEaster - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            let funFact = getFunFactForToday();
+            updateView(days, hours, minutes, seconds, funFact);
+        }
+
+
+
+
+
         function getDayOfYear() {
             const now = new Date();
             const startOfYear = new Date(now.getFullYear(), 2, 25);
@@ -71,6 +78,11 @@
             const dayOfYear = getDayOfYear();
             return funFacts[dayOfYear];
         }
+
+        updateView();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        setInterval(updateView, 60000);
     </script>
 </body>
 
