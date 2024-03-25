@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        //MODEL
+        let countdownToEaster = new Date("Mar 30, 2024 00:00:00").getTime();
+        let x = value => (value < 10 ? "0" + value : value);
+
+        let updateCountdown = setInterval(function () {
+            let now = new Date().getTime();
+            let distance = countdownToEaster - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            createHtml(days, hours, minutes, seconds);
+        }, 1000);
+
+        const funFacts = [
+            "<b>March 25th</b> is also known as Tolkien Reading Day as well as Waffle Day",
+            "<b>March 26th year 1130</b> is the day Norwegian King Sigurd the Crusader died",
+            "<b>March 27th</b> is the Manatee Appreciation Day.... And international Whiskey day",
+            "<b>March 28th</b> is Lady Gaga's birthday! 🥳 ",
+            "<b>March 29th</b> is the International Mermaid Day 🧜‍♀️",
+            "<b>March 30th</b> <h1>HAPPY EASTER!!!!!!!!</h1>",
+        ];
+
+        //VIEW
+        createHtml()
+        function createHtml(days, hours, minutes, seconds) { /*HTML*/
+            const funFact = getFunFactForToday();
+            document.getElementById("app").innerHTML = `
+   <div id="counter">
+   🐰 Time to easter: 
+     ${x(days)} days
+     ${x(hours)} hours
+     ${x(minutes)} minutes
+    ${x(seconds)} seconds
+    🐣
+    </div>
+    <div id="funFact">
+    <h3><i>did you know...</i></h3>
+    <p>
+<li> ${funFact} </li>
+    </div>
+    `;
+        }
+
+
+        //CONTROLLER
+        function getDayOfYear() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 2, 25);
+            const diff = now - startOfYear;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            return dayOfYear;
+        }
+
+        function getFunFactForToday() {
+            const dayOfYear = getDayOfYear();
+            return funFacts[dayOfYear];
+        }
+    </script>
+</body>
+
+</html>
