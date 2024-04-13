@@ -1,6 +1,4 @@
 body {
-
-    background-image: url('https://t4.ftcdn.net/jpg/05/54/20/43/360_F_554204366_xj0A5SLnR03VerwiDQVaYArTNKIWU93Y.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
@@ -9,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    background-image: url('https://t4.ftcdn.net/jpg/05/54/20/43/360_F_554204366_xj0A5SLnR03VerwiDQVaYArTNKIWU93Y.jpg');
 }
 
 #counter {
@@ -49,4 +48,16 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 10px;
+}
+
+#coundownFinish {
+    display: inline-block;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(255, 0, 0);
+    padding: 1px;
+    margin-top: 40px;
+    border: solid 5px rgb(0, 0, 0);
+    background: linear-gradient(to right, #000000, #829100, rgb(255, 255, 255));
 }

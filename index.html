@@ -12,6 +12,7 @@
     <div id="app"></div>
 
     <script>
+
         //MODEL
         let countdownToEaster = new Date("Mar 30, 2024 00:00:00").getTime(); //Datoen å telle ned til
         let x = value => (value < 10 ? "0" + value : value);
@@ -26,33 +27,40 @@
         ]; //fun facts of the day! (hvis det funker)
 
         //VIEW
+        function updateView(days, hours, minutes, seconds) {
+            const funFact = getFunFactForToday();
+            const easterEveStuff = document.getElementById("app");
+            if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+                easterEveStuff.innerHTML = `
+                <div id=coundownFinish>
+                    <H1> EASTER EVE IS HERE AND THE EASTER BUNNY HAS TURNED EVIL!!!!!!!! </h1>
+                        <p>
+                            <h2>RUN FOR YOUR LIVES!!!!11!!1!!!1!!!!111!!!1</h2>
+                    </div>
+            `} else {
+                easterEveStuff.innerHTML = `
+                <div id="counter">
+                    🐰 Time to easter eve: 
+                    ${x(days)} days
+                    ${x(hours)} hours
+                    ${x(minutes)} minutes
+                    ${x(seconds)} seconds
+                    🐣
+                    </div>
+                    <div id="container">
+                        <div id="funFact">
+                            <h3><i>did you know...</i></h3>
+                            <p>
+                                <li> ${funFact} </li>
+                                </div>
+                                <div id="ending">Come back tomorrow for a new fun fact!</div>
+                                </div>
+                                `;
+            }
+        }
         updateView();
 
-        function updateView(days, hours, minutes, seconds) { /*HTML*/
-            const funFact = getFunFactForToday();
-            document.getElementById("app").innerHTML = `
-   <div id="counter">
-   🐰 Time to easter eve: 
-     ${x(days)} days
-     ${x(hours)} hours
-     ${x(minutes)} minutes
-    ${x(seconds)} seconds
-    🐣
-    </div>
-    <div id="container">
-    <div id="funFact">
-    <h3><i>did you know...</i></h3>
-    <p>
-<li> ${funFact} </li>
-    </div>
-    <div id="ending">Come back tomorrow for a new fun fact!</div>
-    </div>
-    `;
-        }
-        
-
         //CONTROLLER
-
         function updateCountdown() {
             let now = new Date().getTime();
             let distance = countdownToEaster - now;
@@ -61,11 +69,13 @@
             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
             let funFact = getFunFactForToday();
-            updateView(days, hours, minutes, seconds, funFact);
+
+            if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+        document.body.style.backgroundImage = "url('https://storage.googleapis.com/pai-images/7f8f36413b194fe29636b0e6931f7885.jpeg')";
         }
 
-
-
+        updateView(days, hours, minutes, seconds, funFact);
+    }
 
 
         function getDayOfYear() {
@@ -82,7 +92,7 @@
             return funFacts[dayOfYear];
         }
 
-        updateView();
+        // updateView();
         updateCountdown();
         setInterval(updateCountdown, 1000);
         setInterval(updateView, 60000);
